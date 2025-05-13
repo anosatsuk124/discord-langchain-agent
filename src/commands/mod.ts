@@ -5,7 +5,7 @@ import {
 } from 'discord.js';
 
 export type InteractionButton = {
-  description_llm: string;
+  description: string;
   button: APIButtonComponent;
 };
 
@@ -14,13 +14,14 @@ export abstract class Command {
   abstract description: string;
   abstract interactionButtons: InteractionButton[];
   abstract slashCommandData: RESTPostAPIChatInputApplicationCommandsJSONBody;
+  abstract init(): Promise<void>;
 
   abstract callback(message: string): Promise<string>;
   abstract onInteraction(customId: string): Promise<string>;
 }
 
 export async function loadCommands(): Promise<Command[]> {
-  const glob = new Glob('**/*.ts');
+  const glob = new Glob('*.ts');
   const scanOptions = {
     cwd: import.meta.dirname,
     absolute: true,
@@ -36,6 +37,7 @@ export async function loadCommands(): Promise<Command[]> {
     const mod = await import(file);
     if (mod.command && mod.command instanceof Command) {
       commands.push(mod.command as Command);
+      await mod.command.init();
       console.log(`Loaded command file: ${file}`);
     } else {
       console.warn(`Invalid plugin file: ${file}`);

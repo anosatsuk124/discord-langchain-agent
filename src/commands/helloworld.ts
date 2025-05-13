@@ -17,11 +17,12 @@ export class HelloWorldCommand extends Command {
     .toJSON();
 
   interactionButtons: InteractionButton[];
+
   constructor() {
     super();
     this.interactionButtons = [
       {
-        description_llm: 'Say Hello',
+        description: 'Say Hello',
         button: new ButtonBuilder()
           .setCustomId('hello_world_hello')
           .setLabel('Hello')
@@ -29,7 +30,7 @@ export class HelloWorldCommand extends Command {
           .toJSON(),
       },
       {
-        description_llm: 'Say Goodbye',
+        description: 'Say Goodbye',
         button: new ButtonBuilder()
           .setCustomId('hello_world_goodbye')
           .setLabel('Goodbye')
@@ -38,6 +39,8 @@ export class HelloWorldCommand extends Command {
       },
     ];
   }
+
+  async init(): Promise<void> {}
 
   async callback(message: string): Promise<string> {
     if (!message) {
