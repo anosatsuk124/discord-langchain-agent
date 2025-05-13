@@ -1,0 +1,28 @@
+{
+  "name": "discord-langchain-agent",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "author": {
+    "name": "Satsuki Akiba",
+    "email": "anosatsuk124@gmail.com"
+  },
+  "scripts": {
+    "fmt": "prettier --write ."
+  },
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@types/bun": "latest",
+    "eslint": "^9.26.0",
+    "globals": "^16.1.0",
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.32.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "discord.js": "^14.19.3"
+  }
+}
